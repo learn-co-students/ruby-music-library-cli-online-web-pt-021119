@@ -15,6 +15,7 @@ class Genre
   # This can be moved into an included module
   def save
     @@all << self
+    @@all = @@all.uniq
   end
 
   # Instance Methods
