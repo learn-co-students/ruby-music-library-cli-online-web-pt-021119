@@ -1,18 +1,26 @@
 require 'pry'
 
 class Song
-  attr_accessor :name, :artist
+  attr_accessor :name, :genre
+  attr_reader :artist
   @@all = []
 
-  def initialize(name, artist = nil)
+  def initialize(name, artist = nil, genre = nil)
     @name = name
     self.artist = artist unless artist == nil
+    self.genre = genre unless genre == nil
     @@all << self
   end
 
-  # def artist=(artist)
-  #   artist.add_song(self) <-- create a circular reference
-  # end
+  def artist=(artist)
+    artist.add_song(self) unless artist.songs.include?(self) || artist.nil?
+    @artist = artist
+  end
+
+  def genre=(genre)
+    genre.songs << self unless genre.songs.include?(self) || genre.nil?
+    @genre = genre
+  end
 
   def self.all
     @@all
