@@ -12,9 +12,14 @@ class Artist
     @songs = []
     @@genres << genre unless genre.nil?
     @@all << self
-    # binding.pry
   end
 
+  # This can be moved into an included module
+  def save
+    @@all << self
+  end
+
+  #Instance Methods
   def genres
     genre_list = []
     self.songs.each do |song|
@@ -25,22 +30,15 @@ class Artist
     @@genres = genre_list.uniq
   end
 
-  def songs
-    @songs
-  end
-
   def add_song(song)
     self.songs << song unless @songs.include?(song)
     song.artist = self unless song.artist == self
     song
   end
 
+  # Class Methods
   def self.all
     @@all
-  end
-
-  def save
-    @@all << self
   end
 
   def self.destroy_all
@@ -52,6 +50,4 @@ class Artist
     created.save
     created
   end
-
-
 end

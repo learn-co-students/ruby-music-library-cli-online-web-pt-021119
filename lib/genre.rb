@@ -12,6 +12,12 @@ class Genre
     @@all << self
   end
 
+  # This can be moved into an included module
+  def save
+    @@all << self
+  end
+
+  # Instance Methods
   def artists
     artist_list = []
     self.songs.each do |song|
@@ -22,12 +28,9 @@ class Genre
     @@artists = artist_list.uniq
   end
 
+  # Class Methods
   def self.all
     @@all
-  end
-
-  def save
-    @@all << self
   end
 
   def self.destroy_all
