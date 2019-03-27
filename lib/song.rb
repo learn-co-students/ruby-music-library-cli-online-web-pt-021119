@@ -2,6 +2,8 @@ class Song
   attr_accessor :name
   attr_reader :artist, :genre
 
+  extend Concerns::Findable
+
   @@all = []
 
   def initialize(name, artist = nil, genre = nil)
@@ -42,4 +44,13 @@ class Song
     created.save
     created
   end
+
+  def self.new_from_filename(filename)
+    artist_name, song_name, genre_name = filename.split(" - ")
+    genre_name = genre_name.split(".mp3")[0].capitalize
+    genre = find_or_create_by_name(genre_name)
+    artist = find_or_create_by_name(artist_name)
+    new_instance = self.new(song_name, artist, genre)
+  end
+
 end
