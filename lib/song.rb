@@ -1,6 +1,3 @@
-# require_relative "./concerns"
-require "pry"
-
 class Song
   extend Concerns::ClassMethods
   include Concerns::InstanceMethods
@@ -18,7 +15,7 @@ class Song
 
   def artist=(artist)
     @artist = artist
-    #self.artist.add_song(self)
+    self.artist.add_song(self) unless self.artist.nil?
   end
 
   def genre=(genre)
