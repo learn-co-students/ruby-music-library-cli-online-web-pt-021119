@@ -1,5 +1,3 @@
-require 'pry'
-
 class Song
   attr_accessor :name
   attr_reader :artist, :genre
@@ -43,18 +41,5 @@ class Song
     created = self.new(name)
     created.save
     created
-  end
-
-  def self.find_by_name(name)
-    self.all.find {|song| song.name == name}
-  end
-
-  def self.find_or_create_by_name(name)
-    # binding.pry
-    if self.find_by_name(name).nil?
-      self.create(name)
-    else
-      self.find_by_name(name)
-    end
   end
 end
