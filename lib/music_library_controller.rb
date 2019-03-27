@@ -27,7 +27,7 @@ class MusicLibraryController
 
   def list_songs
     files = self.importer.files.collect{|file_name| file_name.gsub(".mp3", "")}
-    files.sort_by!{|file_name| file_name.split[1]}
+    files.sort_by!{|file_name| file_name.split(" - ")[1]}
     binding.pry
     files.each.with_index(1) do |file, index|
       puts "#{index}. #{file}"
