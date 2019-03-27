@@ -40,4 +40,18 @@ class MusicLibraryController
     genre_names = Genre.all.collect{|genre| genre.name}.uniq.sort!
     genre_names.each.with_index(1) {|genre_name, index| puts "#{index}. #{genre_name}"}
   end
+
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    artist_name = gets.chomp
+    if (artist = Artist.find_by_name(artist_name))
+      sorted_songs = artist.songs.sort_by {|song| song.name}
+      sorted_songs.uniq.each.with_index(1) {|song, i| puts "#{i}. #{song.name} - #{song.genre.name}"}
+    end
+  end
+
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    genre_name = gets.chomp
+  end
 end
