@@ -11,7 +11,7 @@ class Song
   end
 
   # def artist=(artist)
-  #   artist.add_song(self)
+  #   artist.add_song(self) <-- create a circular reference
   # end
 
   def self.all
