@@ -1,7 +1,7 @@
 require "pry"
 
 class MusicLibraryController
-  attr_accessor :path, :importer
+  attr_accessor :path, :importer, :files
 
   def initialize(path = "./db/mp3s")
     @path = path
@@ -29,6 +29,7 @@ class MusicLibraryController
     files = self.importer.files.collect{|file_name| file_name.gsub(".mp3", "")}
     files.sort_by!{|file_name| file_name.split(" - ")[1]}
     files.each.with_index(1) {|file, index| puts "#{index}. #{file}"}
+    @files = files
   end
 
   def list_artists
@@ -60,7 +61,14 @@ class MusicLibraryController
   end
 
   def play_song
-    puts ("Which song number would you like to play?")
-    song_name = gets.chomp
+    puts "Which song number would you like to play?"
+    song_number = gets.chomp.to_i
+    song_names = self.list_songs
+    if song_number > 0 && song_number <= song_names.size
+      song_name = song_names.split(" - ")[1]
+      artist_name = song_names.split(" - ")[0]
+      "Playing #{song_name} by #{artist_name}"
+      binding.pry
+    end
   end
 end
