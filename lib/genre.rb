@@ -2,6 +2,7 @@ require_relative "./concerns"
 
 class Genre
   extend Concerns::ClassMethods
+  extend Concerns::Findable
   include Concerns::InstanceMethods
 
   attr_accessor :name

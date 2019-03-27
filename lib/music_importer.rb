@@ -1,3 +1,4 @@
+require "pry"
 class MusicImporter
   attr_accessor :path
 
@@ -5,4 +6,7 @@ class MusicImporter
     @path = path
   end
 
+  def files
+    @files = Dir.entries(self.path).select {|f| !File.directory?(f)}
+  end
 end
