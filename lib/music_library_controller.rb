@@ -28,9 +28,16 @@ class MusicLibraryController
   def list_songs
     files = self.importer.files.collect{|file_name| file_name.gsub(".mp3", "")}
     files.sort_by!{|file_name| file_name.split(" - ")[1]}
-    binding.pry
-    files.each.with_index(1) do |file, index|
-      puts "#{index}. #{file}"
-    end
+    files.each.with_index(1) {|file, index| puts "#{index}. #{file}"}
+  end
+
+  def list_artists
+    artist_names = Artist.all.collect{|artist| artist.name}.uniq.sort!
+    artist_names.each.with_index(1) {|artist_name, index| puts "#{index}. #{artist_name}"}
+  end
+
+  def list_genres
+    genre_names = Genre.all.collect{|genre| genre.name}.uniq.sort!
+    genre_names.each.with_index(1) {|genre_name, index| puts "#{index}. #{genre_name}"}
   end
 end
