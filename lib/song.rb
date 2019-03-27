@@ -5,9 +5,14 @@ class Song
   extend Concerns::ClassMethods
   include Concerns::InstanceMethods
 
-  attr_accessor :name
+  attr_accessor :name, :artist
 
   @@all = []
+
+  def initialize(name, artist = nil)
+    self.name = name
+    @artist = artist
+  end
 
   def self.all
     @@all
