@@ -1,17 +1,31 @@
 # require_relative "./concerns"
-# require "pry"
+require "pry"
 
 class Song
   extend Concerns::ClassMethods
   include Concerns::InstanceMethods
 
-  attr_accessor :name, :artist
+  attr_accessor :name
+  attr_reader :artist, :genre
 
   @@all = []
 
-  def initialize(name, artist = nil)
+  def initialize(name, artist = nil, genre = nil)
     self.name = name
+    self.genre = genre
+    self.artist = artist
+  end
+
+  def artist=(artist)
     @artist = artist
+    #self.artist.add_song(self)
+  end
+
+  def genre=(genre)
+    @genre = genre
+    if !self.genre.nil?
+      @genre.songs << self unless self.genre.songs.include?(self)
+    end
   end
 
   def self.all
