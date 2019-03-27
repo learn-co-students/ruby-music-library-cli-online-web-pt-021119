@@ -1,11 +1,28 @@
+require 'pry'
+
 class Artist
   attr_accessor :name, :songs
-  @@all = []
+  attr_reader :genres
 
-  def initialize(name)
+  @@all = []
+  @@genres = []
+
+  def initialize(name, genre = nil)
     @name = name
     @songs = []
+    @@genres << genre unless genre.nil?
     @@all << self
+    # binding.pry
+  end
+
+  def genres
+    genre_list = []
+    self.songs.each do |song|
+      if song.artist == self
+        genre_list << song.genre
+      end
+    end
+    @@genres = genre_list.uniq
   end
 
   def songs

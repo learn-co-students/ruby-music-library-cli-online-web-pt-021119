@@ -1,11 +1,25 @@
 class Genre
   attr_accessor :name, :songs
-  @@all = []
+  attr_reader :artists
 
-  def initialize(name)
+  @@all = []
+  @@artists = []
+
+  def initialize(name, artist = nil)
     @name = name
     @songs = []
+    @@artists << artist unless artist.nil?
     @@all << self
+  end
+
+  def artists
+    artist_list = []
+    self.songs.each do |song|
+      if song.genre == self
+        artist_list << song.artist
+      end
+    end
+    @@artists = artist_list.uniq
   end
 
   def self.all
