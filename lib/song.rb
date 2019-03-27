@@ -1,3 +1,6 @@
+# require_relative "./concerns"
+# require "pry"
+
 class Song
   extend Concerns::ClassMethods
   include Concerns::InstanceMethods
@@ -6,6 +9,11 @@ class Song
 
   @@all = []
 
+  def self.all
+    @@all
+  end
+
 end
 
-puts song = Song.new("Allison")
+# puts song = Song.new("Allison")
+# binding.pry
