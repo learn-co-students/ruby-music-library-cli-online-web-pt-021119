@@ -27,10 +27,9 @@ class Artist
     artist
   end
 
-  # def genres
-  #   binding.pry
-  #   self.songs.collect {|song| song.genre.name}
-  # end
+  def genres
+    self.songs.collect {|song| song.genre}.uniq
+  end
 
   def self.all
     @@all
