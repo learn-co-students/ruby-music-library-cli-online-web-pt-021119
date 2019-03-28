@@ -28,21 +28,29 @@ class MusicLibraryController
   end
 
   def list_songs
-    @library.each_with_index do |song, index|
-      puts "#{index + 1}. #{song.chomp('.mp3')}"
+    songs = Song.all.sort_by {|song| song.name}
+    songs.each_with_index do |song, index|
+      puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
   end
 
   def list_artists
-    binding.pry
-    @library.each_with_index do |song, index|
+    artists = Artist.all.sort_by {|artist| artist.name}
+    artists.each_with_index do |artist, index|
+      puts "#{index + 1}. #{artist.name}"
     end
   end
 
   def list_genres
+    genres = Genre.all.sort_by {|genre| genre.name}
+    genres.each_with_index do |genre, index|
+      puts "#{index + 1}. #{genre.name}"
+    end
   end
 
   def list_songs_by_artist(artist)
+    binding.pry
+    songs = Song.all.collect do {|song| song.artist == artist}
   end
 
   def list_songs_by_genre(genre)
