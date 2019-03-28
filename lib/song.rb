@@ -21,7 +21,7 @@ class Song
 
   # Instance Methods
   def artist=(artist)
-    artist.songs << self unless artist.songs.include?(self) || artist.nil?
+    artist.add_song(self) unless artist.songs.include?(self) || artist.nil?
     @artist = artist
   end
 
