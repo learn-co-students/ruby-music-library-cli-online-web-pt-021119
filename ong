@@ -1,0 +1,31 @@
+
+[1mFrom:[0m /home/eyal/ruby-music-library-cli-online-web-pt-021119/lib/musicimporter.rb @ line 36 MusicImporter#files:
+
+    [1;34m13[0m: [32mdef[0m [1;34mfiles[0m
+    [1;34m14[0m:   [36m@@songs[0m = [1;34;4mDir[0m.glob(path + [31m[1;31m"[0m[31m/**.mp3[1;31m"[0m[31m[0m)
+    [1;34m15[0m:   [36m@@songs[0m = [36m@@songs[0m.collect [32mdo[0m |song|
+    [1;34m16[0m:     *garbage, content = song.split([31m[1;31m'[0m[31m/[1;31m'[0m[31m[0m)
+    [1;34m17[0m:     song = content
+    [1;34m18[0m:   [32mend[0m
+    [1;34m19[0m:   [1;34m# they need to be alphabetized by song name before creating them[0m
+    [1;34m20[0m: 
+    [1;34m21[0m:   [1;34m# 1. split the song string into an array of the 3 elements[0m
+    [1;34m22[0m:   [1;34m# 2. set up a hash with all the array elements as key/value pairs[0m
+    [1;34m23[0m:   [1;34m# 3. sort the hash keys by the second array element in the hash value[0m
+    [1;34m24[0m:   [1;34m# 4. turn the hash back into an array then a string (which song is)[0m
+    [1;34m25[0m:   [1;34m## Remember to ensure the new song string has the same structure[0m
+    [1;34m26[0m: 
+    [1;34m27[0m:   hash = {}
+    [1;34m28[0m:   [1;36mself[0m.songs.each [32mdo[0m |song|
+    [1;34m29[0m:     artist_name, song_name, genre_name = song.split([31m[1;31m'[0m[31m - [1;31m'[0m[31m[0m)
+    [1;34m30[0m:     hash[song] = [artist_name,song_name,genre_name]
+    [1;34m31[0m:   [32mend[0m
+    [1;34m32[0m:   arrays = hash.values.sort_by { |key,value| value }
+    [1;34m33[0m: 
+    [1;34m34[0m:   [36m@@songs[0m.collect.with_index [32mdo[0m |song, song_index|
+    [1;34m35[0m:     arrays.each_with_index [32mdo[0m |array_song, array_index|
+ => [1;34m36[0m:       binding.pry
+    [1;34m37[0m:     [32mend[0m
+    [1;34m38[0m:   [32mend[0m
+    [1;34m39[0m: [32mend[0m
+
