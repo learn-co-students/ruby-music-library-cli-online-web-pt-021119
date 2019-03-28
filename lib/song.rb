@@ -46,11 +46,20 @@ class Song
   end
 
   def self.new_from_filename(filename)
+    binding.pry
     artist_name, song_name, genre_name = filename.split(" - ")
+    binding.pry
     genre_name = genre_name.split(".mp3")[0].capitalize
+    binding.pry
     genre = find_or_create_by_name(genre_name)
+    binding.pry
     artist = find_or_create_by_name(artist_name)
+    binding.pry
     new_instance = self.new(song_name, artist, genre)
+    binding.pry
+    new_instance.artist = artist
+    new_instance.genre = genre
+
   end
 
 end
