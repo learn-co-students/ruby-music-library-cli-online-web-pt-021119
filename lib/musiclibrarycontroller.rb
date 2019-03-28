@@ -19,13 +19,24 @@ class MusicLibraryController
     puts "What would you like to do?"
   end
 
-  def list_songs # wtf is with the expected test outputs!?
-    @library.sort.reverse.each_with_index do |song, index|
-      puts "#{(index + 1).to_s}. #{song.chomp('.mp3')}"
+  def call
+    welcome
+    input = gets.chomp
+    while input != "exit"
+      input = gets.chomp
+    end
+  end
+
+  def list_songs
+    @library.each_with_index do |song, index|
+      puts "#{index + 1}. #{song.chomp('.mp3')}"
     end
   end
 
   def list_artists
+    binding.pry
+    @library.each_with_index do |song, index|
+    end
   end
 
   def list_genres
@@ -38,38 +49,9 @@ class MusicLibraryController
   end
 
   def play_song
+    # puts "Which song number would you like to play?"
+    # list_songs
+    # index = gets.chomp
+    # index = (index_to.i += 1).to_s
   end
-
-  def call
-    welcome
-    input = gets.chomp
-    while input != "exit"
-      input = gets.chomp
-    end
-  end
-
 end
-
-# Original Loop
-
-# input = nil
-# start_loop = case input
-# when "list songs"
-#   list_songs
-#   input = get_input
-#   start_loop
-# when "list artists"
-#   list_artists
-#   input = get_input
-#   start_loop
-# when "list genres"
-#   list_genres
-#   input = get_input
-#   start_loop
-# when "play song"
-#   play_song
-# else
-#   welcome
-#   input = get_input
-#   start_loop
-# end
