@@ -15,7 +15,7 @@ class Genre
   end
 
   def self.destroy_all
-    self.all.clear
+    all.clear
   end
 
   def self.create(name)
