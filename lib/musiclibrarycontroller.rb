@@ -22,7 +22,14 @@ class MusicLibraryController
   def call
     welcome
     input = gets.chomp
+    list_songs if input == "list songs"
+    list_artists if input == "list artists"
+    list_genres if input == "list genres"
+    list_songs_by_artist if input == "list artist"
+    list_songs_by_genre if input == "list genre"
+    play_song if input == "play song"
     while input != "exit"
+      binding.pry
       input = gets.chomp
     end
   end
@@ -79,9 +86,13 @@ class MusicLibraryController
   end
 
   def play_song
-    # puts "Which song number would you like to play?"
-    # list_songs
-    # index = gets.chomp
-    # index = (index_to.i += 1).to_s
+    puts "Which song number would you like to play?"
+    number = gets.chomp
+    songs = Song.all.sort_by {|song| song.name}
+    songs.each_with_index do |song, index|
+      if (index + 1) == number.to_i
+        puts "Playing #{song.name} by #{song.artist.name}"
+      end
+    end
   end
 end
