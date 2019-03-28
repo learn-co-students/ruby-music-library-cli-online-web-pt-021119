@@ -1,11 +1,10 @@
 class MusicLibraryController
-  attr_accessor :path
+  attr_accessor :path, :library
 
   def initialize(path = './db/mp3s')
     @path = path
     library = MusicImporter.new(@path)
-    library.import
-    # binding.pry
+    @library = library.import
   end
 
   def welcome
@@ -20,27 +19,32 @@ class MusicLibraryController
     puts "What would you like to do?"
   end
 
-  def get_input
-    gets.chomp
+  def list_songs # wtf is with the expected test outputs!?
+    @library.sort.reverse.each_with_index do |song, index|
+      puts "#{(index + 1).to_s}. #{song.chomp('.mp3')}"
+    end
   end
 
-  # def list_songs
-  # end
-  #
-  # def list_artists
-  # end
-  #
-  # def list_genres
-  # end
-  #
-  # def play_song
-  # end
+  def list_artists
+  end
+
+  def list_genres
+  end
+
+  def list_songs_by_artist(artist)
+  end
+
+  def list_songs_by_genre(genre)
+  end
+
+  def play_song
+  end
 
   def call
     welcome
-    input = get_input
+    input = gets.chomp
     while input != "exit"
-      input = get_input
+      input = gets.chomp
     end
   end
 
