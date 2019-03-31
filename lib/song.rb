@@ -1,4 +1,7 @@
+require_relative "../config/environment.rb"
+
 class Song
+  extend Concerns::Findable
   attr_accessor :name
   attr_reader :artist, :genre
   @@all = []
@@ -11,10 +14,6 @@ class Song
 
   def self.all
     @@all
-  end
-
-  def self.destroy_all
-    all.clear
   end
 
   def self.create(name)
