@@ -1,5 +1,44 @@
 require "spec_helper"
 
+class Artist
+  attr_accessor :name, :song
+
+  @@all []
+
+  def initialize(name)
+    @name = name
+    @song = []
+    save
+  end
+
+  def self.all
+    @@all
+  end
+
+  def self.destroy_all
+    @@all = []
+  end
+
+  def save
+    @@all << self
+  end
+
+  def self.created(artist)
+    self.new(artist)
+  end
+
+  def add_song(song)
+    if song.artist == nil
+      song.artist = self
+
+  if !@songs.include?song
+    @songs << song
+  end
+end
+
+
+
+
 describe "Artist" do
   let(:artist) { Artist.new("Neutral Milk Hotel") }
 

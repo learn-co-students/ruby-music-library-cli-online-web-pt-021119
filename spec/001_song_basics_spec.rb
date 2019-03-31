@@ -1,5 +1,45 @@
 require "spec_helper"
 
+class Song
+attr_accessor = :name,
+
+@@all = []
+
+
+def initialize(name, artist = nil, genre = nil)
+  @name = name
+  if artist = nil
+    self.artist = artist
+  save
+end
+
+def genre
+  @genre
+end
+
+def genre=(genre)
+  @genre = genre
+  genre.add_song(self)
+end
+
+def artist
+  @artist
+end
+
+def artist=(artist)
+  @artist = artist
+  artist.add_song(self)
+end
+
+
+def save
+  @@all << self
+end
+
+def self.create(name)
+self.new(name)
+end
+
 describe "Song" do
   let(:song) { Song.new("In the Aeroplane Over the Sea") }
 
