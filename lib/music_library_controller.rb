@@ -46,10 +46,10 @@ class MusicLibraryController
     artists_sorted = artists_hash.collect do |x|
       [x[:artist], x[:song], x[:genre]]
     end
-    binding.pry
-  #artists_sorted.each_with_index do |x, index|
-      #puts "#{index+1}. #{x[0]}"
-  #end
+    artist_array = artists_sorted.collect {|x| x[0]}.uniq!
+    artist_array.each_with_index do |x, index|
+      puts "#{index+1}. #{x}"
+    end
   end
 
 end
