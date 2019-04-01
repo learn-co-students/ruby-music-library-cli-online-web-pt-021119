@@ -2,7 +2,7 @@ require_relative '../lib/concerns/findable'
 
 class Artist
 
- extend Concerns::Findable 
+ extend Concerns::Findable
 
  attr_accessor :name, :songs
   @@all = []
@@ -22,6 +22,7 @@ class Artist
 
   def save
     @@all << self
+    #test
   end
 
   def self.create(name)
@@ -49,4 +50,3 @@ class Artist
 
 
 end
- 
