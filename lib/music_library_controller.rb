@@ -21,6 +21,12 @@ class MusicLibraryController
       puts "What would you like to do?"
       
       input = gets.strip
+      list_songs if input == "list songs"
+      list_artists if input == "list artists"
+      list_genres if input == "list genres"
+      list_songs_by_artist if input == "list artist"
+      list_songs_by_genre if input == "list genre"
+      play_song if input == "play song"
     end
   end
 
@@ -44,29 +50,32 @@ class MusicLibraryController
 
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
-    artist = gets.strip
-    songs = music.collect {|x| x.chomp(".mp3")}
-    songs.collect! {|x| x.split(" - ")}.sort_by! {|x| x[1]}
-    songs.select! {|x| x if x[0] == artist}
-    songs.each {|x| x.delete_at(0)}
-    songs.each_with_index do |x, index|
-      puts "#{index+1}. #{x[0]} - #{x[1]}"
+    input = gets.strip
+    if artist = Artist.find_by_name(input)
+      artist.songs.sort_by(&:name).each_with_index do |x, index|
+        puts "#{index+1}. #{x.name} - #{x.genre.name}"
+      end
     end
-    #binding.pry
   end
 
   def list_songs_by_genre
     puts "Please enter the name of a genre:"
-    genre = gets.chomp
+    input = gets.strip
+    if genre = Genre.find_by_name(input)
+      genre.songs.sort_by(&:name).each_with_index do |x, index|
+        puts "#{index+1}. #{x.artist.name} - #{x.name}"
+      end
+    end
   end
 
   def play_song
     puts "Which song number would you like to play?"
-    song_num = gets.chomp
+    input = gets.strip.to_i
     #binding.pry
-    if (1..list_songs.length).include?(song_num)
-      #play song
+    if (1..Song.all.length).include?(input)
+      song = Song.all.sort_by(&:name)[input - 1]
     end
+    puts "Playing #{song.name} by #{song.artist.name}" if song
   end
 
 end
