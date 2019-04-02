@@ -1,6 +1,9 @@
 require 'pry'
+require_relative './concerns.rb'
 
 class Artist
+
+    extend Concerns::Findable
 
     @@all = []
 
@@ -36,7 +39,8 @@ class Artist
     end
 
     def genres
-        genres
+        x = @songs.collect {|song| song.genre}
+        x.uniq
     end
 
 end
