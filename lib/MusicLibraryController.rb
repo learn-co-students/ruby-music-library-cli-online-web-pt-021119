@@ -62,12 +62,8 @@ class MusicLibraryController
 
 	def list_songs_by_artist
 		puts "Please enter the name of an artist:"
-		a = gets
-		if a == "Testing for #puts" or a == "Testing for #gets"
-			return a
-		else
-			artist = Artist.find_by_name(a)
-		end
+		a = gets.strip
+		artist = Artist.find_by_name(a)
 
 		if artist
 			artist.songs.sort_by {|s| s.name}.each_with_index {|s, i|
@@ -78,13 +74,8 @@ class MusicLibraryController
 
 	def list_songs_by_genre
 		puts "Please enter the name of a genre:"
-		g = gets
-
-		if g == "Testing for #gets" or g == "Testing for #puts"
-			return g
-		else
-			genre = Genre.find_by_name(g)
-		end
+		g = gets.strip
+		genre = Genre.find_by_name(g)
 
 		if genre
 			genre.songs.sort_by {|s| s.name}.each_with_index {|s, i|

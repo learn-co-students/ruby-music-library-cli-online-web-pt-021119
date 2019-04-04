@@ -5,8 +5,7 @@ class Song
 	@@all = []
 
 	extend Concerns::Findable
-
-	# can refactor initialize, create, all, and save into Concerns
+	include Concerns::InstanceMethods
 
 	def initialize(name, artist = nil, genre = nil)
 		@name = name
@@ -19,25 +18,6 @@ class Song
 		@@all
 	end
 
-	def self.create(name)
-		song = Song.new(name)
-		song.save
-		song
-	end
-
-	def self.destroy_all
-		@@all.clear
-	end
-
-	# Mixed in from Findable module
-	#def self.find_by_name(name)
-	#	@@all.find {|song| song.name == name}
-	#end
-
-	#def self.find_or_create_by_name(name)
-	#	self.find_by_name(name) || self.create(name)
-	#end
-
 	def self.new_from_filename(filename)
 		artist, name, genre = filename.split('.mp3').join.split(' - ')
 		#binding.pry
@@ -49,10 +29,6 @@ class Song
 
 	def self.create_from_filename(filename)
 		self.new_from_filename(filename)
-	end
-
-	def save
-		@@all << self
 	end
 
 	def artist=(artist)
