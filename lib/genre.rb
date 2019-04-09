@@ -1,9 +1,10 @@
 class Genre 
-  attr_accessor :name
+  attr_accessor :name, :songs
   @@all = []
   
   def initialize(name)
     @name = name 
+    @songs = []
   end
   
   def self.all
@@ -22,4 +23,19 @@ class Genre
     new(name).save.last
   end
     
+  def songs 
+  @songs
+  end
+  
+  def artists
+    songs.map {|song| song.artist}.uniq
+  end
+  
+  
+  
+  
+  
+  
+  
+  
 end
