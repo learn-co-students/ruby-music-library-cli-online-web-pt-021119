@@ -22,8 +22,8 @@ class Song
    @@all << self
   end
   
-  def self.create(name)
-    new(name).save.last
+  def self.create(name, artist = nil, genre = nil)
+    new(name, artist, genre).save.last
   end
   #how is this method collabarting with the artist class method?
   def artist=(artist)
@@ -49,10 +49,19 @@ class Song
   def self.new_from_filename(name)
   segment = name.split(" - ")
   artist, song, genre = segment[0], segment[1], segment[2].gsub(".mp3","")
-  self.new(song)
-  
-  
+  artist = Artist.find_or_create_by_name(artist)
+  genre = Genre.find_or_create_by_name(genre)
+  self.new(song, artist, genre)
   #binding.pry
+  end
+  
+  def self.create_from_filename(name)
+  segment = name.split(" - ")
+  artist, song, genre = segment[0], segment[1], segment[2].gsub(".mp3","")
+  artist = Artist.find_or_create_by_name(artist)
+  genre = Genre.find_or_create_by_name(genre)
+  self.create(song, artist, genre)
+    
   end
   
   
