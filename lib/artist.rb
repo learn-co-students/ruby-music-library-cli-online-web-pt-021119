@@ -1,22 +1,23 @@
+
+require 'pry'
+require_relative './concerns.rb'
+
 class Artist
+
   extend Concerns::Findable
 
-  attr_accessor :name
-  attr_reader :songs
+  attr_accessor :name, :songs
 
   @@all = []
 
-  def initialize(name)
+  def initialize (name)
     @name = name
     @songs = []
-  end
-
-  def self.all
-    @@all
+    @@all << self
   end
 
   def self.destroy_all
-    all.clear
+    @@all.clear
   end
 
   def save
@@ -27,9 +28,10 @@ class Artist
     artist = new(name)
     artist.save
     artist
+  end
 
-    # Or, as a one-liner:
-    # new(name).tap{ |a| a.save }
+  def self.all
+    @@all
   end
 
   def add_song(song)
@@ -37,7 +39,15 @@ class Artist
     songs << song unless songs.include?(song)
   end
 
+  def self.create(name)
+    artist = Artist.new(name)
+    artist.save
+    artist
+  end
+
   def genres
-    songs.collect{ |s| s.genre }.uniq
+    Genre.all.select do |genre|
+      genre.songs.each {|song| song.artist == self}
+    end
   end
 end
